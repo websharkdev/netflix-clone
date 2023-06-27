@@ -1,6 +1,6 @@
 # Full Stack Netflix Clone
 
-![Netflix Clone](link_to_image)
+![Netflix Clone](https://i.ibb.co/4tmxCR0/image-1.png)
 
 This project is a full stack Netflix clone built using React, Tailwind CSS, Next.js, Prisma, MongoDB, NextAuth, and deployed on Vercel. It aims to replicate the main features and functionality of the Netflix platform.
 
