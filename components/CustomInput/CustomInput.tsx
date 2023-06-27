@@ -9,7 +9,7 @@ type Props = {
   type?: string;
 };
 
-const Input = memo(({ id, onChange, value, label, type }: Props) => {
+const CustomInput = memo(({ id, onChange, value, label, type }: Props) => {
   return (
     <div className="relative">
       <input
@@ -30,4 +30,6 @@ const Input = memo(({ id, onChange, value, label, type }: Props) => {
   );
 });
 
-export default Input;
+CustomInput.displayName = "CustomInput";
+
+export default CustomInput;
