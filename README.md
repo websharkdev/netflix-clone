@@ -1,85 +1,36 @@
-# Full Stack Netflix Clone
-
-![Netflix Clone](https://i.ibb.co/mCPsJxb/image-1.png)
-
-This project is a full stack Netflix clone built using React, Tailwind CSS, Next.js, Prisma, MongoDB, NextAuth, and deployed on Vercel. It aims to replicate the main features and functionality of the Netflix platform.
-
-## Stack
-
-The project utilizes the following technologies and libraries:
-
-- React
-- Tailwind CSS
-- Next.js
-- Prisma
-- MongoDB
-- NextAuth
-- Vercel
-
-## Dependencies
-
-The project uses the following dependencies:
-
-```
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@heroicons/react": "^2.0.16",
-    "@next-auth/mongodb-adapter": "^1.1.1",
-    "@next-auth/prisma-adapter": "^1.0.5",
-    "@next/font": "13.1.6",
-    "@prisma/client": "^4.10.1",
-    "@types/node": "18.13.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "axios": "^1.3.3",
-    "bcrypt": "^5.1.0",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
-    "framer-motion": "^9.0.4",
-    "lodash": "^4.17.21",
-    "mongodb": "^4.14.0",
-    "mongoose": "^6.9.2",
-    "next": "^13.2.4",
-    "next-auth": "^4.21.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "swr": "^2.0.3",
-    "typescript": "4.9.5",
-    "zustand": "^4.3.3"
-```
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-To get started with the Netflix Clone project, follow these steps:
+First, run the development server:
 
-1. Clone the repository: `git clone https://github.com/your-username/netflix-clone.git`
-2. Install the dependencies: `npm install`
-3. Set up your MongoDB database and configure the connection in the `.env` file.
-4. Run the development server: `npm run dev`
-5. Open your browser and visit: `http://localhost:3000`
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-Feel free to explore the codebase and make any necessary modifications to suit your requirements.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Features
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-The Netflix Clone project includes the following features:
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- Dynamic Billboard component displaying random movies with autoplay functionality.
-- Movie List feature providing a comprehensive list of movies from the database.
-- Favorites feature allowing users to add or remove movies from their favorites list.
-- PlayButton component enabling users to initiate playback of movies.
-- VideoPlayer component specifically designed for individual movies, allowing users to watch the selected movie.
-- Info Modal Component providing additional information and details about each movie.
+## Learn More
 
-## License
+To learn more about Next.js, take a look at the following resources:
 
-The Netflix Clone project is licensed under the [MIT License](link_to_license). Feel free to use, modify, and distribute the code as per the license terms.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-For more information, please refer to the [LICENSE](link_to_license) file.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Acknowledgments
+## Deploy on Vercel
 
-This project is inspired by the Netflix platform and serves as a learning exercise for building full stack applications using modern web technologies.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Special thanks to the developers and contributors of the utilized libraries and frameworks that made this project possible
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
