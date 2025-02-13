@@ -37,6 +37,9 @@ const Template = ({ children }: Props) => {
         break;
     }
   }, [path]);
+
+  console.log(information);
+
   return (
     <div className="container mx-auto min-h-screen flex justify-center items-center flex-col">
       <Card className="w-full max-w-md">
