@@ -5,7 +5,16 @@ type Props = {
 };
 
 const MainProvider = ({ children }: Props) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default MainProvider;
