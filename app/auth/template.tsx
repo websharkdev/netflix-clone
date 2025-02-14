@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { usePathname } from "next/navigation";
-import { Fragment, useMemo } from "react";
+import { useMemo } from "react";
 
 type Props = {
   children: Readonly<React.ReactNode>;
