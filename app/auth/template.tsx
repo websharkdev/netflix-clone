@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 
 type Props = {
   children: Readonly<React.ReactNode>;
@@ -32,6 +32,7 @@ const Template = ({ children }: Props) => {
             "Access your account to manage your tasks, track progress, and stay productive. Welcome back!",
           reset: true,
           signup: true,
+          signin: false,
         };
       case "signup":
         return {
@@ -39,15 +40,17 @@ const Template = ({ children }: Props) => {
           description:
             "Join us today to unlock exclusive features, stay organized, and achieve your goals effortlessly. Get started now!",
           reset: true,
-          signup: true,
+          signup: false,
+          signin: true,
         };
       case "reset":
         return {
           title: "Reset Your Password",
           description:
             "Forgot your password? No worries! Enter your email to reset your password and regain access to your account.",
-          reset: true,
-          signup: true,
+          reset: false,
+          signup: false,
+          signin: true,
         };
 
       default:
@@ -74,6 +77,15 @@ const Template = ({ children }: Props) => {
                 className="w-full h-10"
               >
                 Forgot password?
+              </Button>
+            ) : null}
+            {information?.signin ? (
+              <Button
+                variant="ghost"
+                href="/auth/signin"
+                className="w-full h-10"
+              >
+                Sign in
               </Button>
             ) : null}
             {information?.signup ? (

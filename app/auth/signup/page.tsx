@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -15,6 +16,7 @@ export default function SignUp() {
           <Label htmlFor="email">Password</Label>
           <Input id="password" type="password" placeholder="********" />
         </div>
+        <Button className="w-full">Sign up</Button>
       </div>
     </form>
   );
