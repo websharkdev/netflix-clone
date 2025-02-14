@@ -16,8 +16,8 @@ export default function SignIn() {
           <Label htmlFor="email">Password</Label>
           <Input id="password" type="password" placeholder="********" />
         </div>
+        <Button className="w-full">Sign in</Button>
       </div>
-      <Button>Sign in</Button>
     </form>
   );
 }
