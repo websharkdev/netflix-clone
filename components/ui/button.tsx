@@ -44,18 +44,24 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, href, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, href = "", ...props }, ref) => {
     const { push } = useRouter();
 
     const Comp = asChild ? Slot : "button";
+
+    const handleClick = () => {
+      if (href.length > 1) {
+        push(href);
+      }
+
+      props.onClick;
+    };
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        onClick={handleClick}
         {...props}
-        onClick={() =>
-          !!href && href.trim().length > 0 ? push(href) : props.onClick
-        }
       />
     );
   }

@@ -1,11 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { motion as m } from "motion/react";
 import { useTheme } from "next-themes";
-import { useCallback } from "react";
-import { Button } from "./button";
-
-type ThemeVariants = "dark" | "light" | "system";
 
 const raysVariants = {
   hidden: {
@@ -48,40 +45,25 @@ const rayVariant = {
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
-  const onThemeChange = useCallback(() => {
-    switch (theme as ThemeVariants) {
-      case "light":
-        setTheme("dark" as ThemeVariants);
-        break;
-      case "dark":
-        setTheme("light" as ThemeVariants);
-        break;
-      case "system":
-        setTheme("dark" as ThemeVariants);
-        break;
-
-      default:
-        setTheme("system");
-        break;
-    }
-  }, [theme]);
-
   const sunPath =
     "M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z";
   const moonPath =
     "M12 16C14.2091 16 16 14.2091 16 12C12.581 12.9126 10.8369 11.099 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z";
 
   return (
-    <Button onClick={onThemeChange} size="icon" variant="outline">
+    <Button
+      onClick={() => (theme === "light" ? setTheme("dark") : setTheme("light"))}
+      size="icon"
+      variant="outline"
+    >
       <m.svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <m.path
-          d={sunPath}
           initial={{
             fillOpacity: 0,
             strokeOpacity: 0,
           }}
           animate={
-            theme === "dark"
+            theme === "dark" || theme === "system"
               ? {
                   d: moonPath,
                   strokeOpacity: 1,
@@ -100,6 +82,7 @@ const ThemeToggle = () => {
                   d: sunPath,
                 }
           }
+          d={theme === "light" ? sunPath : moonPath}
         />
         <m.g
           variants={raysVariants}
