@@ -6,11 +6,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useMovieStore } from "@/store/movie.store";
 import { IMovie } from "@/types/general";
 import { QueryStatus } from "@tanstack/react-query";
 import { Play } from "lucide-react";
@@ -26,6 +26,8 @@ const CMovie = ({
 }: IMovie & {
   status: QueryStatus;
 }) => {
+  const { onToggle } = useMovieStore();
+
   return (
     <Card className="flex flex-col group">
       <CardHeader className="pt-0">
@@ -62,6 +64,7 @@ const CMovie = ({
           <Button
             disabled={status !== "success"}
             size="icon"
+            onClick={() => onToggle(videoUrl)}
             className="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto peer size-10 absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600 rounded-full text-stone-50 transition-all duration-500"
           >
             <Play size={48} />

@@ -4,18 +4,21 @@ import { useMovies } from "@/actions";
 import { CMovie } from "@/components/custom/cards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useMovieStore } from "@/store/movie.store";
 import { IMovie } from "@/types/general";
 import { Play } from "lucide-react";
 import { useMemo } from "react";
 
 export default function Home() {
-  const { status, data, error } = useMovies();
+  const { status, data = [] as IMovie[], error } = useMovies();
+  const { onToggle } = useMovieStore();
 
   const parsed = useMemo(() => {
     if (status === "success") {
       if (error) return {} as IMovie;
+      const randomIndex = Math.floor(Math.random() * (data.length - 0 + 1) + 0);
 
-      return data[0] as IMovie;
+      return data[randomIndex] as IMovie;
     }
 
     return {} as IMovie;
@@ -29,7 +32,7 @@ export default function Home() {
             <img
               src={parsed.thumbnailUrl}
               alt={parsed.title}
-              className="object-contain w-full max-w-4xl opacity-80 hover:opacity-100 !rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
+              className="object-cover w-full max-w-4xl h-[500px] opacity-80 hover:opacity-100 !rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
           ) : (
             <div className="object-contain w-full aspect-video max-w-4xl rounded-xl bg-stone-100 dark:bg-stone-800 border border-input animate-pulse" />
@@ -37,6 +40,7 @@ export default function Home() {
           <Button
             disabled={status !== "success"}
             size="icon"
+            onClick={() => onToggle(parsed.videoUrl)}
             className="peer size-14 absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600 rounded-full text-stone-50 transition-all duration-500"
           >
             <Play size={48} />
