@@ -5,4 +5,12 @@ export interface IMovie {
     thumbnailUrl: string,
     genre: string
     duration: string
-} 
+}
+
+
+export interface IUser {
+    name: string;
+    surname: string;
+    email: string;
+    avatar: string
+}
