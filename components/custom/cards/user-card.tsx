@@ -6,10 +6,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Bolt, Heart, LogOut, Settings } from "lucide-react";
+import Link from "next/link";
 
-type Props = {};
-
-const CUser = (props: Props) => {
+const CUser = () => {
   return (
     <Popover>
       <PopoverTrigger>
@@ -18,8 +18,28 @@ const CUser = (props: Props) => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent align="end">
-        Place content for the popover here.
+      <PopoverContent align="end" className="grid grid-cols-1 gap-1.5 w-40">
+        <Link
+          className="text-sm text-stone-700 hover:text-stone-950 bg-stone-50/30 hover:bg-stone-50 py-1 px-2 rounded-md font-semibold flex items-center gap-1.5"
+          href="/dashboard/watchlist"
+        >
+          <Heart size={14} />
+          <span>Watchlist</span>
+        </Link>
+        <Link
+          className="text-sm text-stone-700 hover:text-stone-950 bg-stone-50/30 hover:bg-stone-50 py-1 px-2 rounded-md font-semibold flex items-center gap-1.5"
+          href="/dashboard/settings"
+        >
+          <Bolt size={14} />
+          <span>Settings</span>
+        </Link>
+        <Link
+          className="text-sm text-stone-700 hover:text-stone-950 bg-stone-50/30 hover:bg-stone-50 py-1 px-2 rounded-md font-semibold flex items-center gap-1.5"
+          href="/dashboard/logout"
+        >
+          <LogOut size={14} />
+          <span>Log out</span>
+        </Link>
       </PopoverContent>
     </Popover>
   );
