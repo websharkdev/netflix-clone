@@ -1,15 +1,11 @@
 "use client";
 
+import { MovieSearch } from "@/components/custom/actions";
+import { CUser } from "@/components/custom/cards";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import Link from "next/link";
 import { Fragment } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
   children: Readonly<React.ReactNode>;
@@ -60,20 +56,11 @@ const Template = ({ children }: Props) => {
         ) : null}
 
         <div className="flex items-center gap-2.5">
+          <MovieSearch />
           <ThemeToggle />
 
           {isLogined ? (
-            <Popover>
-              <PopoverTrigger>
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </PopoverTrigger>
-              <PopoverContent align="end">
-                Place content for the popover here.
-              </PopoverContent>
-            </Popover>
+            <CUser />
           ) : (
             <Fragment>
               <Button size="sm" variant="secondary" href="/auth/signin">
