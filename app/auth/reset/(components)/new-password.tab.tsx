@@ -14,6 +14,7 @@ import { toast } from "@/hooks/use-toast";
 import { resetPassword } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useQueryState } from "nuqs";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,9 +24,9 @@ const schema = z.object({
 
 const TNewPassword = () => {
   const router = useRouter();
-  const token = new URLSearchParams(window.location.search).get(
-    "token"
-  ) as string;
+  const [token] = useQueryState("token", {
+    defaultValue: "",
+  });
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import ModalsProvider from "./modals.provider";
 import { ThemeProvider } from "./theme.provider";
+import { Suspense } from "react";
 
 type Props = {
   children: Readonly<React.ReactNode>;
@@ -20,7 +21,7 @@ const MainProvider = ({ children }: Props) => {
         enableSystem={false}
       >
         <QueryClientProvider client={queryClient}>
-          {children}
+          <Suspense>{children}</Suspense>
         </QueryClientProvider>
         <ModalsProvider />
       </ThemeProvider>
