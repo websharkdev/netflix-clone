@@ -34,7 +34,7 @@ const TNewPassword = () => {
     },
   });
   const onSubmit = async (values: z.infer<typeof schema>) => {
-    const { success, error: verror } = schema.safeParse(values);
+    const { success } = schema.safeParse(values);
     if (success) {
       const { data, error } = await resetPassword({
         newPassword: values.password,

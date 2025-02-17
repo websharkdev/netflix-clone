@@ -30,7 +30,7 @@ export default function Page() {
     },
   });
   const onSubmit = async (values: z.infer<typeof schema>) => {
-    const { success, error: verror } = schema.safeParse(values);
+    const { success } = schema.safeParse(values);
     if (success) {
       return await resetPassword({
         newPassword: values.password,

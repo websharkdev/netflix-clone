@@ -79,8 +79,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               }}
             >
               We received a request to reset the password for your Nefflix
-              account. If you didn't make this request, you can safely ignore
-              this email.
+              account. If you didn&apos;t make this request, you can safely
+              ignore this email.
             </p>
 
             <p

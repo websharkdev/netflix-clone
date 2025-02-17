@@ -28,7 +28,7 @@ export default function TReset() {
     },
   });
   const onSubmit = async (values: z.infer<typeof schema>) => {
-    const { success, error: verror } = schema.safeParse(values);
+    const { success } = schema.safeParse(values);
     if (success) {
       return forgetPassword({
         email: values.email,

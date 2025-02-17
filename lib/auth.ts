@@ -14,7 +14,7 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
-        sendResetPassword: async ({ user, url, token }, request) => {
+        sendResetPassword: async ({ user, url }) => {
             await resend.emails.send({
                 from: 'Acme <onboarding@resend.dev>',
                 to: [user.email],

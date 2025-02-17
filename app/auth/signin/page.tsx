@@ -43,7 +43,7 @@ export default function Page() {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { success, error: verror } = formSchema.safeParse(values);
+    const { success } = formSchema.safeParse(values);
     if (success) {
       return await signIn.email({
         email: values.email, // user email address
