@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Github } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -33,6 +33,14 @@ export default function Page() {
   const handleSignInGitHub = async () => {
     const data = await signIn.social({
       provider: "github",
+    });
+
+    console.log(data);
+  };
+
+  const handleSignInGoogle = async () => {
+    const data = await signIn.social({
+      provider: "google",
     });
 
     console.log(data);
@@ -84,13 +92,26 @@ export default function Page() {
             )}
           />
           <Button type="submit" className="w-full">
-            Sign Up
+            Sign In
           </Button>
         </form>
       </Form>
       <div className="flex items-center gap-2.5">
-        <Button size="icon" variant="ghost" onClick={handleSignInGitHub}>
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleSignInGitHub}
+        >
           <Github size={14} />
+          <span>GitHub</span>
+        </Button>
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleSignInGoogle}
+        >
+          <Mail size={14} />
+          <span>Google</span>
         </Button>
       </div>
     </div>
