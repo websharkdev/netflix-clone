@@ -4,6 +4,8 @@ import { MovieSearch } from "@/components/custom/actions";
 import { CUser } from "@/components/custom/cards";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ui/theme-toggle";
+import { Toaster } from "@/components/ui/toaster";
+import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import { Fragment } from "react";
 
@@ -12,9 +14,7 @@ type Props = {
 };
 
 const Template = ({ children }: Props) => {
-  const { isLogined } = {
-    isLogined: true,
-  };
+  const { data } = useSession();
 
   return (
     <div className="bg-stone-50 dark:bg-black h-full w-full min-h-screen text-stone-900 dark:text-white">
@@ -26,7 +26,7 @@ const Template = ({ children }: Props) => {
           nefflix
         </Link>
 
-        {isLogined ? (
+        {!!data?.session ? (
           <div className="text-sm font-medium flex justify-between gap-10 items-center transition-all duration-500">
             <Link
               className="transition-all duration-500 text-stone-500 hover:text-stone-950"
@@ -59,7 +59,7 @@ const Template = ({ children }: Props) => {
           <MovieSearch />
           <ThemeToggle />
 
-          {isLogined ? (
+          {!!data?.session ? (
             <CUser />
           ) : (
             <Fragment>
@@ -74,6 +74,8 @@ const Template = ({ children }: Props) => {
         </div>
       </header>
       {children}
+
+      <Toaster />
     </div>
   );
 };
