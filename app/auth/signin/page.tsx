@@ -31,19 +31,15 @@ export default function Page() {
   });
 
   const handleSignInGitHub = async () => {
-    const data = await signIn.social({
+    return await signIn.social({
       provider: "github",
     });
-
-    console.log(data);
   };
 
   const handleSignInGoogle = async () => {
-    const data = await signIn.social({
+    return await signIn.social({
       provider: "google",
     });
-
-    console.log(data);
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

@@ -1,19 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { TNewPassword, TReset } from "./(components)";
 
 export default function Reset() {
+  const tab = new URLSearchParams(window.location.search).get("t") as string;
+
   return (
-    <form>
-      <div className="grid w-full items-center gap-4">
-        <div className="flex flex-col gap-2.5">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="example@email.com" />
-        </div>
-        <Button className="w-full">Reset</Button>
-      </div>
-    </form>
+    <div className="grid grid-cols-1 gap-2.5">
+      {tab === "new-password" ? <TNewPassword /> : <TReset />}
+    </div>
   );
 }

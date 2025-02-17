@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useSession, signOut } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import { Bolt, Heart, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,10 +17,12 @@ const CUser = () => {
   const { data } = useSession();
 
   const handleSignOut = async () => {
-    return await signOut().then((res) => {
-      router.push("/");
-
-      return res;
+    return await signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/"); // redirect to login page
+        },
+      },
     });
   };
 

@@ -1,7 +1,12 @@
+import { EmailTemplate } from "@/components/custom/template";
 import { db } from "@/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from "better-auth/next-js";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY as string);
+
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
@@ -9,6 +14,15 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
+        sendResetPassword: async ({ user, url, token }, request) => {
+            await resend.emails.send({
+                from: 'Acme <onboarding@resend.dev>',
+                to: [user.email],
+                subject: 'Reset your Nefflix password',
+                react: EmailTemplate({ name: user.name, link: url }) as React.ReactElement,
+
+            });
+        }
     },
     socialProviders: {
         github: {
