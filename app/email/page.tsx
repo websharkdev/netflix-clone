@@ -1,4 +1,11 @@
 import { EmailTemplate } from "@/components/custom/template";
+import { defaultMetadata } from "@/lib/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  ...defaultMetadata,
+  title: "Email Preview",
+};
 
 const Page = () => {
   return (
