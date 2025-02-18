@@ -3,6 +3,7 @@
 import { MovieSearch } from "@/components/custom/actions";
 import { CUser } from "@/components/custom/cards";
 import { Button } from "@/components/ui/button";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { Toaster } from "@/components/ui/toaster";
 import { useSession } from "@/lib/auth-client";
@@ -18,6 +19,8 @@ const Template = ({ children }: Props) => {
 
   return (
     <div className="bg-stone-50 dark:bg-black h-full w-full min-h-screen text-stone-900 dark:text-white">
+      <ScrollProgress />
+
       <header className="mx-auto z-50 bg-stone-50/40 dark:bg-black/40 backdrop-blur-lg px-6 py-4 rounded-xl container flex items-center flex-nowrap justify-between">
         <Link
           href="/"
@@ -36,21 +39,21 @@ const Template = ({ children }: Props) => {
             </Link>
             <Link
               className="transition-all duration-500 text-stone-500 hover:text-stone-950"
-              href="/dashboard/series"
+              href="/dashboard?t=cartoon"
             >
-              Series
+              Cartoon
             </Link>
             <Link
               className="transition-all duration-500 text-stone-500 hover:text-stone-950"
-              href="/dashboard/movies"
+              href="/dashboard?t=movie"
             >
               Movies
             </Link>
             <Link
               className="transition-all duration-500 text-stone-500 hover:text-stone-950"
-              href="/dashboard/categories"
+              href="/dashboard/watchlist"
             >
-              Categories
+              Watchlist
             </Link>
           </div>
         ) : null}
