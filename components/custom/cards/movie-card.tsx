@@ -14,6 +14,7 @@ import { useMovieStore } from "@/store/movie.store";
 import { IMovie } from "@/types/general";
 import { QueryStatus } from "@tanstack/react-query";
 import { Play } from "lucide-react";
+import Image from "next/image";
 
 const CMovie = ({
   description,
@@ -53,9 +54,12 @@ const CMovie = ({
       <CardContent className="-order-10 pt-6 grid grid-cols-1 gap-4">
         <div className="flex flex-1 justify-center items-center gap-10 group relative play-btn transition-all duration-500">
           {status === "success" ? (
-            <img
+            <Image
               src={thumbnailUrl}
               alt={title}
+              width={400}
+              quality={40}
+              height={320}
               className="object-cover aspect-video w-full opacity-80 hover:opacity-100 !rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
           ) : (

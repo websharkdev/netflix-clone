@@ -4,10 +4,16 @@ import { useMovies } from "@/actions";
 import { CMovie } from "@/components/custom/cards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { removeSpacing } from "@/lib/string";
 import { useMovieStore } from "@/store/movie.store";
 import { IMovie } from "@/types/general";
-import { Play } from "lucide-react";
+import { Baby, Filter, FilterX, Globe, Laugh, Play } from "lucide-react";
+import Image from "next/image";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -15,6 +21,10 @@ const Body = () => {
   const [search] = useQueryState("s", {
     defaultValue: "",
   });
+  const [type, setType] = useQueryState("t", {
+    defaultValue: "",
+  });
+
   const { status, data, error } = useMovies();
   const { onToggle } = useMovieStore();
 
@@ -36,14 +46,43 @@ const Body = () => {
     return {} as IMovie;
   }, [status, data, error, search]);
 
+  const tparsed = useMemo(() => {
+    if (status === "success") {
+      const tdata = data.filter((movie) => movie.type === type);
+      const randomIndex = Math.floor(
+        Math.random() * (tdata.length - 0 + 1) + 0
+      );
+
+      const current = tdata.find((movie) =>
+        removeSpacing(movie.title).startsWith(removeSpacing(search))
+      );
+
+      if (current) {
+        return current as IMovie;
+      }
+
+      return tdata[randomIndex];
+    }
+
+    return {} as IMovie;
+  }, [status, data, error, search]);
+
   return (
     <div className="grid grid-cols-1 gap-14">
       <div className="container mx-auto h-[calc(100dvh_-_100px)] flex flex-col justify-between">
         <div className="flex flex-1 justify-center items-center gap-10 group relative play-btn transition-all duration-500">
           {status === "success" && parsed.thumbnailUrl.length > 0 ? (
-            <img
-              src={parsed.thumbnailUrl || ""}
+            <Image
+              src={
+                type.length > 0
+                  ? tparsed.thumbnailUrl || ""
+                  : parsed.thumbnailUrl || ""
+              }
               alt={parsed.title || ""}
+              width={896}
+              height={500}
+              quality={95}
+              priority
               className="object-cover w-full max-w-4xl h-[500px] opacity-80 hover:opacity-100 !rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
           ) : (
@@ -97,21 +136,76 @@ const Body = () => {
       </div>
       <div className="container mx-auto h-[calc(100dvh_-_100px)] flex flex-col gap-5 pt-5 border-t border-input">
         <div className="flex justify-between items-center gap-2">
-          <h6 className="text-lg font-semibold">Collections</h6>
-          <Button variant="link" size="sm">
-            All
-          </Button>
+          <div className="flex flex-nowrap items-center">
+            <h6 className="text-lg font-semibold">Collections</h6>
+            <h6 onDoubleClick={() => setType("")}>
+              {type.length > 0
+                ? `/${type[0].toUpperCase()}${type.slice(1)} `
+                : ""}
+            </h6>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onDoubleClick={() => setType("")}
+                  className="size-8 ml-2.5"
+                >
+                  {type.length > 2 ? (
+                    <FilterX size={14} />
+                  ) : (
+                    <Filter size={14} />
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40">
+                <div className="grid grid-cols-1 gap-2.5">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setType("")}
+                  >
+                    <Globe size={14} />
+                    <span>All</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setType("movie")}
+                  >
+                    <Laugh size={14} />
+                    <span>Movie</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setType("cartoon")}
+                  >
+                    <Baby size={14} />
+                    <span>Cartoon</span>
+                  </Button>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
 
         <div className="grid grid-cols-4 gap-2.5">
           {status === "success"
-            ? data.map((movie: IMovie, index: number) => (
-                <CMovie
-                  key={`dashboard/main--${index}`}
-                  {...movie}
-                  status={status}
-                />
-              ))
+            ? data
+                .filter((movie) =>
+                  type.length > 0 ? movie.type === type : movie
+                )
+                .map((movie: IMovie, index: number) => (
+                  <CMovie
+                    key={`dashboard/main--${index}`}
+                    {...movie}
+                    status={status}
+                  />
+                ))
             : [...Array(7)].map((_, index) => (
                 <CMovie
                   key={`dashboard/main--skeleton--${index}`}
