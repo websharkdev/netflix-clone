@@ -25,7 +25,7 @@ const Body = () => {
     defaultValue: "",
   });
 
-  const { status, data, error } = useMovies();
+  const { status, data } = useMovies();
   const { onToggle } = useMovieStore();
 
   const parsed = useMemo(() => {
@@ -44,7 +44,7 @@ const Body = () => {
     }
 
     return {} as IMovie;
-  }, [status, data, error, search]);
+  }, [status, data, search]);
 
   const tparsed = useMemo(() => {
     if (status === "success") {
@@ -65,7 +65,7 @@ const Body = () => {
     }
 
     return {} as IMovie;
-  }, [status, data, error, search]);
+  }, [status, data, search, type]);
 
   return (
     <div className="grid grid-cols-1 gap-14">
