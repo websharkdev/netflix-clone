@@ -91,7 +91,9 @@ const Body = () => {
           <Button
             disabled={status !== "success"}
             size="icon"
-            onClick={() => onToggle(parsed.videoUrl)}
+            onClick={() =>
+              onToggle(type.length > 0 ? tparsed.videoUrl : parsed.videoUrl)
+            }
             className="peer size-14 absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 hover:bg-red-600 rounded-full text-stone-50 transition-all duration-500"
           >
             <Play size={48} />
@@ -102,7 +104,7 @@ const Body = () => {
         <div className="grid grid-cols-10 h-max gap-10 items-end relative">
           {status === "success" ? (
             <h2 className="col-span-6 text-8xl font-bold text-left max-w-4xl">
-              {parsed.title}
+              {type.length > 0 ? tparsed.title : parsed.title}
             </h2>
           ) : (
             <div className="col-span-6">
@@ -112,13 +114,15 @@ const Body = () => {
           <div className="col-span-4 grid grid-cols-1 gap-2.5">
             <div className="flex gap-2.5">
               {status === "success" ? (
-                <Badge className="w-max">{parsed.duration}</Badge>
+                <Badge className="w-max">
+                  {type.length > 0 ? tparsed.duration : parsed.duration}
+                </Badge>
               ) : (
                 <div className="w-20 h-8 bg-stone-100 dark:bg-stone-800 animate-pulse rounded-full" />
               )}
               {status === "success" ? (
                 <Badge variant="secondary" className="w-max">
-                  {parsed.genre}
+                  {type.length > 0 ? tparsed.genre : parsed.genre}
                 </Badge>
               ) : (
                 <div className="w-20 h-8 bg-stone-100 dark:bg-stone-800 animate-pulse rounded-full" />
@@ -126,7 +130,7 @@ const Body = () => {
             </div>
             {status === "success" ? (
               <p className="max-w-lg text-xs md:text-sm leading-relaxed font-mono font-medium">
-                {parsed.description}
+                {type.length > 0 ? tparsed.description : parsed.description}
               </p>
             ) : (
               <div className="w-full h-20 bg-stone-100 dark:bg-stone-800 animate-pulse rounded-md" />
