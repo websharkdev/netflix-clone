@@ -12,7 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Github, Mail } from "lucide-react";
+import { Eye, EyeClosed, Github, Mail } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -22,6 +23,7 @@ const formSchema = z.object({
 });
 
 const Body = () => {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,7 +83,24 @@ const Body = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="**********" type="password" {...field} />
+                  <div className="relative flex flex-nowrap items-center border border-stone-100 dark:border-stone-800 bg-stone-50 dark:bg-stone-900">
+                    <Input
+                      placeholder="**********"
+                      type={passwordVisible ? "text" : "password"}
+                      className="bg-none !ring-0 !outline-none !border-none"
+                      {...field}
+                    />
+                    <div
+                      className="size-10 flex justify-center items-center cursor-pointer"
+                      onClick={() => setPasswordVisible(!passwordVisible)}
+                    >
+                      {passwordVisible ? (
+                        <Eye size={14} />
+                      ) : (
+                        <EyeClosed size={14} />
+                      )}
+                    </div>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
