@@ -13,7 +13,7 @@ const MovieSearch = () => {
     <div className="group flex flex-nowrap relative">
       <Input
         type="text"
-        className="!bg-white border-none h-10 peer group-hover:w-52 focus-visible:w-52 group-hover:placeholder:not-sr-only placeholder:sr-only focus-visible:placeholder:not-sr-only transition-all duration-300 w-10"
+        className="!bg-white border-none h-10 peer group-hover:w-52 focus-visible:w-52 group-hover:placeholder:not-sr-only placeholder:sr-only !text-[0px] group-hover:!text-sm focus-visible:!text-sm focus-visible:placeholder:not-sr-only transition-all duration-300 w-10"
         onChange={(e) => setSearch(e.target.value)}
         value={search}
         placeholder="Movie name..."

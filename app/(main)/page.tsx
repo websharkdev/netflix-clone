@@ -11,7 +11,7 @@ export default function Home() {
         <h6 className="text-center text-sm font-mono font-medium uppercase">
           A nefflix original series
         </h6>
-        <h1 className="text-[23rem] leading-none font-bold uppercase text-center">
+        <h1 className="text-[18vw] 2xl:text-[22rem] leading-none font-bold uppercase text-center">
           Nefflix
         </h1>
 

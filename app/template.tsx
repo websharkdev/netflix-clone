@@ -56,7 +56,7 @@ const Template = ({ children }: Props) => {
         ) : null}
 
         <div className="flex items-center gap-2.5">
-          <MovieSearch />
+          {!!data?.session && <MovieSearch />}
           <ThemeToggle />
 
           {!!data?.session ? (
