@@ -11,6 +11,14 @@ import { Play } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 
+import { defaultMetadata } from "@/lib/constants";
+import { Metadata as TMetadata } from "next";
+
+export const Metadata: TMetadata = {
+  ...defaultMetadata,
+  title: "Dashboard",
+};
+
 export default function Home() {
   const [search] = useQueryState("s", {
     defaultValue: "",
