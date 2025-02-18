@@ -1,6 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "./fetch";
+import { IMovie } from "@/types/general";
 
 
 export const useMovies = () => {
@@ -11,6 +12,6 @@ export const useMovies = () => {
     });
 
     return {
-        status, data, error
+        status, data: data as IMovie[], error
     }
 } 

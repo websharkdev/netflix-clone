@@ -4,34 +4,46 @@ import { useMovies } from "@/actions";
 import { CMovie } from "@/components/custom/cards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { removeSpacing } from "@/lib/string";
 import { useMovieStore } from "@/store/movie.store";
 import { IMovie } from "@/types/general";
 import { Play } from "lucide-react";
+import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 
 export default function Home() {
-  const { status, data = [] as IMovie[], error } = useMovies();
+  const [search] = useQueryState("s", {
+    defaultValue: "",
+  });
+  const { status, data, error } = useMovies();
   const { onToggle } = useMovieStore();
 
   const parsed = useMemo(() => {
     if (status === "success") {
-      if (error) return {} as IMovie;
       const randomIndex = Math.floor(Math.random() * (data.length - 0 + 1) + 0);
 
-      return data[randomIndex] as IMovie;
+      const current = data.find((movie) =>
+        removeSpacing(movie.title).startsWith(removeSpacing(search))
+      );
+
+      if (current) {
+        return current as IMovie;
+      }
+
+      return data[randomIndex];
     }
 
     return {} as IMovie;
-  }, [status, data, error]);
+  }, [status, data, error, search]);
 
   return (
     <div className="grid grid-cols-1 gap-14">
       <div className="container mx-auto h-[calc(100dvh_-_100px)] flex flex-col justify-between">
         <div className="flex flex-1 justify-center items-center gap-10 group relative play-btn transition-all duration-500">
-          {status === "success" ? (
+          {status === "success" && parsed.thumbnailUrl.length > 0 ? (
             <img
-              src={parsed.thumbnailUrl}
-              alt={parsed.title}
+              src={parsed.thumbnailUrl || ""}
+              alt={parsed.title || ""}
               className="object-cover w-full max-w-4xl h-[500px] opacity-80 hover:opacity-100 !rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
           ) : (
