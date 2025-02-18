@@ -1,4 +1,5 @@
 export interface IMovie {
+    type: "cartoon" | 'movie',
     title: string,
     description: string,
     videoUrl: string,
